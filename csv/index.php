@@ -1,0 +1,3 @@
+<?php
+
+// NONE SHALL PASS.
