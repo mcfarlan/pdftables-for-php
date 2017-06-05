@@ -14,4 +14,4 @@ For on-demand use, double click the `start_conversion.command` file.
 
 ## Use in Automated Process
 
-For automated use (by using a tool like [Noodlesoft's Hazel](https://www.noodlesoft.com)), setup a workflow to watch a folder and execute the same `start_conversion.command` file.
+For automated use (by using a tool like [Noodlesoft's Hazel](https://www.noodlesoft.com)), setup a workflow to watch a folder and execute the same `start_conversion.command` file. Alternatively in a server environment, you could make use of a cron job to execute the `.command` file via the `sh` command.
