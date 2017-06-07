@@ -10,11 +10,19 @@ class PDF_Tables_PHP {
     private $save_conversion_here     = 'csv';          // Name of the folder you would like to save the converted file to; relative path
     private $move_processed_pdfs_here = 'processed';    // Move all processed PDFs to this folder; relative path
 
+    /**
+     * PDF_Tables_PHP Constructor
+     */
     function __construct() {
         $this->dir      =  __DIR__ . '/';
         $this->files    = array_diff( scandir( __DIR__ ), $this->ignore_these_files() );
     }
 
+    /**
+     * List any files you wish to ignore here.
+     * - A check is still done so only PDFs will be processed.
+     * - But this will help with performance if there are a lot of other files in the same directory.
+     */
     private function ignore_these_files() {
         $ignore_these_files   = array(
             '..',
@@ -29,6 +37,9 @@ class PDF_Tables_PHP {
         return $ignore_these_files;
     }
 
+    /**
+     * Run this app/class
+     */
     public function run() {
         if ( ! is_array( $this->files ) || empty( $this->files ) ) {
             print 'No files to convert';
@@ -42,6 +53,11 @@ class PDF_Tables_PHP {
         return $this->api_key;
     }
 
+    /**
+     * Determine the proper file extension given a format choice
+     *
+     * @param string    $format     desired format for output
+     */
     private function which_format_ext( $format ) {
         if ( $format == 'csv' || $format == 'xml' ) {
             return $format;
@@ -50,6 +66,10 @@ class PDF_Tables_PHP {
         }
     }
 
+    /**
+     * Maybe run the conversion on a file if it's a PDF
+     * @param string     $file  relative file path
+     */
     private function maybe_convert_file( $file ) {
         if ( substr( $file, -3 ) == 'pdf' && substr( $file, -3 != 'csv' ) ) {
             convert_to_csv( $file );
@@ -60,6 +80,10 @@ class PDF_Tables_PHP {
         }
     }
 
+    /**
+     * Send a PDF to PDF Tables for conversion
+     * @param string  $file     relative file path
+     */
     private function convert_to_csv( $file ) {
         $the_curl   = curl_init();
         $filename   = substr( $file, 0, -4 );
@@ -92,5 +116,9 @@ class PDF_Tables_PHP {
     }
 }
 
+/**
+ * Run the PDF_Tables_PHP class
+ * @var PDF_Tables_PHP
+ */
 $app = new PDF_Tables_PHP();
 $app->run();
