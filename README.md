@@ -4,7 +4,7 @@ Send PDF documents to [PDF Tables](https://pdftables.com/), via their [API](http
 
 ## Installation
 
-1. Download the [latest](https://github.com/mcfarlan/pdftables-for-php/archive/latest.zip) release.
+1. Download the [latest](https://github.com/mcfarlan/pdftables-for-php/archive/v0.1.1.zip) release.
 2. Change configuration values in the [main class](https://github.com/mcfarlan/pdftables-for-php/blob/master/convert.php) to your liking.
 3. [Dance](https://www.youtube.com/watch?v=SONH6Kpfta0) and rejoice - you're finished.
 4. Use this script on-demand or part of an automated process.
