@@ -29,42 +29,24 @@ class PDF_Tables_PHP {
         return $ignore_these_files;
     }
 
+    public function run() {
+        if ( ! is_array( $this->files ) || empty( $this->files ) ) {
+            print 'No files to convert';
+            return;
+        }
+
+        foreach ( $this->files as $file ) {
+            $this->maybe_convert_file( $file );
+        }
+
+        return $this->api_key;
+    }
+
     private function which_format_ext( $format ) {
         if ( $format == 'csv' || $format == 'xml' ) {
             return $format;
         } else if ( $format == 'xlsx-single' || $format == 'xlsx-multiple' ) {
             return 'xlsx';
-        }
-    }
-
-    private function convert_a_file( $file ) {
-        $the_curl   = curl_init();
-        $filename   = substr( $file, 0, -4 );
-        $file       = curl_file_create( $file, 'application/pdf' );
-        $format_ext = which_format_ext( $format );
-
-        curl_setopt( $the_curl, CURLOPT_URL, 'https://pdftables.com/api?key=' . $api_key . '&format=' . $format );
-        curl_setopt( $the_curl, CURLOPT_POSTFIELDS, array( 'file' => $file ) );
-        curl_setopt( $the_curl, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $the_curl, CURLOPT_ENCODING, 'gzip,deflate' );
-
-        $result = curl_exec( $the_curl );
-        if ( curl_errno( $the_curl ) ) {
-            print( 'Oh Dear! Error calling PDFTables: ' . curl_error( $the_curl ) );
-        }
-
-        // Save PDF converstion to file
-        file_put_contents ( $filename . '.' . $format_ext , $result );
-
-        // Close the connection
-        curl_close( $the_curl );
-
-        // Relax the connection to allow for latency
-        sleep( 2 );
-
-        // Move the converted file into the processed folder
-        if ( copy( $filename . '.' . $format_ext, $save_conversion_here . '/' . $filename . '.' . $format_ext ) ) {
-            unlink( $filename . '.' . $format_ext );
         }
     }
 
@@ -110,4 +92,5 @@ class PDF_Tables_PHP {
     }
 }
 
-PDF_Tables_PHP->run();
+$app = new PDF_Tables_PHP();
+$app->run();
