@@ -7,11 +7,11 @@ Send PDF documents to [PDF Tables](https://pdftables.com/), via their [API](http
 1. Download the [latest](https://github.com/mcfarlan/pdftables-for-php/archive/v0.1.1.zip) release.
 2. Change configuration values in the [main class](https://github.com/mcfarlan/pdftables-for-php/blob/master/convert.php) to your liking.
 3. [Dance](https://www.youtube.com/watch?v=SONH6Kpfta0) and rejoice - you're finished.
-4. Use this script on-demand or part of an automated process.
+4. Use this script on-demand or part of an automated process (see below for usage notes).
 
 ## On-Demand Usage
 
-For on-demand use, double click the `start_conversion.command` file.
+For on-demand use, double click the `start_conversion.command` file. You may have to make this file executable; do this via the terminal with a command like this: `chmod +x start_conversion.command`.
 
 ## Use in Automated Process
 
@@ -19,7 +19,7 @@ For automated use (by using a tool like [Noodlesoft's Hazel](https://www.noodles
 
 Alternatively in a server environment, you could make use of a cron job to execute the `.command` file via the `sh` command. Or even better, remove the `start_conversion.command` and make use of `PHP_Tables_PHP::run()` method within a PHP environment.
 
-## Important Notes
+## Purpose, Support, Guarantees (spoiler: there are none)
 
 - This script was developed for a very particular use and client. As such it probably won't be completely _plug 'n play_ but can be modified to work in part of a standalone ~complex~ use case or automated process with some editing.
 - Never, ever, ever save credentials or API keys to a git history. Ever.
